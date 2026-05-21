@@ -59,6 +59,7 @@ spec:
   target:
     name: litellm-postgres-creds
     creationPolicy: Owner
+    deletionPolicy: Retain
   data:
     - secretKey: username
       remoteRef: { key: secret/litellm, property: DB_USER }
@@ -142,6 +143,7 @@ spec:
   target:
     name: litellm-secrets
     creationPolicy: Owner
+    deletionPolicy: Retain
   data:
     - secretKey: LITELLM_MASTER_KEY
       remoteRef: { key: secret/litellm, property: LITELLM_MASTER_KEY }
