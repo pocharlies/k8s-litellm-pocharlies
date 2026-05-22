@@ -178,4 +178,5 @@ spec:
       services:
         - name: litellm
           port: 4000
-  tls: {}
+  tls:
+    store: { name: default, namespace: traefik-lan }
