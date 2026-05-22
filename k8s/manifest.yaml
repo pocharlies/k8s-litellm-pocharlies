@@ -165,6 +165,23 @@ spec:
   ports:
     - { name: http, port: 4000, targetPort: 4000 }
 ---
+# TLS cert for litellm.e-dani.com (DNS-01 via letsencrypt-prod ClusterIssuer).
+# Issued into this namespace so the IngressRoute can reference it by secretName —
+# the shared *.e-dani.com wildcard (wildcard-edani-tls) lives only in traefik-lan
+# and is not replicated here.
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: litellm-edani
+  namespace: litellm
+spec:
+  secretName: litellm-tls
+  dnsNames:
+    - litellm.e-dani.com
+  issuerRef:
+    kind: ClusterIssuer
+    name: letsencrypt-prod
+---
 # LAN access for internal services (no Authelia — API key protected)
 apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
@@ -174,10 +191,10 @@ metadata:
 spec:
   entryPoints: [websecure]
   routes:
-    - match: Host(`litellm.lan.e-dani.com`)
+    - match: Host(`litellm.e-dani.com`)
       kind: Rule
       services:
         - name: litellm
           port: 4000
   tls:
-    store: { name: default, namespace: traefik-lan }
+    secretName: litellm-tls
