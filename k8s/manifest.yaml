@@ -54,7 +54,7 @@ data:
       - model_name: llm-fast
         litellm_params:
           model: openai/llm-fast
-          api_base: http://llm-fast.litellm.svc.cluster.local:8210/v1
+          api_base: http://llm-fast.llm.svc.cluster.local:8210/v1
           api_key: EMPTY
 
       # Embeddings (bge-m3, dgx1, Phase 10)
