@@ -583,7 +583,7 @@ spec:
     metadata:
       labels: { app: litellm }
       annotations:
-        config.k8s.e-dani.com/revision: smart-router-20260522-2
+        config.k8s.e-dani.com/revision: bge-fallbacks-20260522-1
     spec:
       enableServiceLinks: false
       nodeSelector:
