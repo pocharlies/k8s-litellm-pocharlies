@@ -203,6 +203,7 @@ data:
         - litellm_strip_params.proxy_handler_instance
       drop_params: true
       set_verbose: false
+      require_auth_for_metrics_endpoint: false
       num_retries: 2
       request_timeout: 300
 
@@ -580,7 +581,7 @@ spec:
     metadata:
       labels: { app: litellm }
       annotations:
-        config.k8s.e-dani.com/revision: bge-fallbacks-20260522-3
+        config.k8s.e-dani.com/revision: litellm-metrics-20260522-1
     spec:
       enableServiceLinks: false
       nodeSelector:
