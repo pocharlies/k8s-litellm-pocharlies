@@ -203,6 +203,14 @@ data:
       store_prompts_in_spend_logs: true
       background_health_checks: true
       enable_passthrough_logging: false
+      # Bound LiteLLM_SpendLogs growth (was 3.1 GB in 7 days). Auto-purge rows
+      # older than 30d, sweep daily — keeps prompts for the dashboard Logs tab
+      # while capping the table that was starving /health/readiness.
+      maximum_spend_logs_retention_period: "30d"
+      maximum_spend_logs_retention_interval: "1d"
+      # Batch spend writes every 60s (default 10s) so the update_spend job
+      # stops backing up ("maximum number of running instances reached").
+      proxy_batch_write_at: 60
 
     router_settings:
       routing_strategy: simple-shuffle
@@ -610,6 +618,11 @@ spec:
             httpGet: { path: /health/readiness, port: 4000 }
             initialDelaySeconds: 20
             periodSeconds: 15
+            # /health/readiness does a DB round-trip; under spend-aggregation
+            # load it exceeds the 1s default and flaps the pod out of the
+            # Service. 5s timeout + 5 failures tolerates the transient spikes.
+            timeoutSeconds: 5
+            failureThreshold: 5
       volumes:
         - name: config
           configMap: { name: litellm-config }
