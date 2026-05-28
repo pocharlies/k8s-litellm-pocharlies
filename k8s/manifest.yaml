@@ -132,6 +132,7 @@ data:
           api_base: http://bge-m3-embedding.llm.svc.cluster.local:8000/v1
           api_key: not-used
         model_info:
+          mode: embedding
           max_tokens: 8192
       - model_name: bge-m3-cpu
         litellm_params:
@@ -139,6 +140,7 @@ data:
           api_base: http://bge-m3-embedding-cpu.llm.svc.cluster.local:8000/v1
           api_key: not-used
         model_info:
+          mode: embedding
           max_tokens: 8192
       - model_name: bge-m3-embedding
         litellm_params:
@@ -146,6 +148,7 @@ data:
           api_base: http://bge-m3-embedding.llm.svc.cluster.local:8000/v1
           api_key: not-used
         model_info:
+          mode: embedding
           max_tokens: 8192
       - model_name: bge-m3-embedding-cpu
         litellm_params:
@@ -153,6 +156,7 @@ data:
           api_base: http://bge-m3-embedding-cpu.llm.svc.cluster.local:8000/v1
           api_key: not-used
         model_info:
+          mode: embedding
           max_tokens: 8192
 
       - model_name: bge-reranker
@@ -161,6 +165,7 @@ data:
           api_base: http://bge-reranker.llm.svc.cluster.local:8000
           api_key: not-used
         model_info:
+          mode: rerank
           max_tokens: 8192
       - model_name: bge-reranker-cpu
         litellm_params:
@@ -168,6 +173,7 @@ data:
           api_base: http://bge-reranker-cpu.llm.svc.cluster.local:8000
           api_key: not-used
         model_info:
+          mode: rerank
           max_tokens: 8192
       - model_name: bge-reranker-v2-m3
         litellm_params:
@@ -175,6 +181,7 @@ data:
           api_base: http://bge-reranker.llm.svc.cluster.local:8000
           api_key: not-used
         model_info:
+          mode: rerank
           max_tokens: 8192
       - model_name: bge-reranker-v2-m3-cpu
         litellm_params:
@@ -182,6 +189,7 @@ data:
           api_base: http://bge-reranker-cpu.llm.svc.cluster.local:8000
           api_key: not-used
         model_info:
+          mode: rerank
           max_tokens: 8192
 
     litellm_settings:
